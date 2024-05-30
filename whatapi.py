@@ -81,7 +81,7 @@ class WhatAPI:
         self.passkey = None
         self.userid = None
         self.last_request = time.time()
-        self.rate_limit = 2.0 # seconds between requests
+        self.rate_limit = 9.0 # seconds between requests
         self._login()
 
     def _login(self):
@@ -184,7 +184,7 @@ class WhatAPI:
         else:
             media_params = ['&media={0}'.format(media_search_map[m]) for m in media]
 
-        pattern = re.compile(r'reportsv2\.php\?action=report&amp;id=(\d+)".*?torrents\.php\?id=(\d+)"', re.MULTILINE | re.IGNORECASE | re.DOTALL)
+        pattern = re.compile(r'reportsv2\.php\?action=report&amp;id=(\d+)".*?torrents\.php\?id=(\d+).*?"', re.MULTILINE | re.IGNORECASE | re.DOTALL)
         if mode == 'snatched' or mode == 'both' or mode == 'all':
             url = '{0}/torrents.php?type=snatched&userid={1}&format=FLAC'.format(self.endpoint, self.userid)
             for mp in media_params:
